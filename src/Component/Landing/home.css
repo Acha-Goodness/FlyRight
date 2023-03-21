@@ -1,0 +1,11 @@
+.home{
+    background-image: url('../../Assets/images/Plane.jpg');
+    height: 50vh;
+}
+.home h2{
+    padding: 10px;
+    font-size: 40px; 
+}
+.home p{
+    margin-left: 20px;
+}
