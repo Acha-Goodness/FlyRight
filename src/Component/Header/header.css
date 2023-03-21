@@ -5,19 +5,34 @@
     font-size: 12px;
     font-weight: bold;
 }
+.header_logo img{
+    width:8%;
+}
 .header_navbar{
     background-color: black;
+}
+.header_menu{
+    color: white;
+    flex: 1;
+    align-items: center;
+}
+.header_menu nav ul{
+    color:white;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.header_menu nav ul li{
+    list-style: none;
 }
 .header_navbar_text{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding:2% 0%;
     width:85%;
     margin:0 auto;
     box-sizing: border-box;
-}
-.header_logo img{
-    width:8%;
 }
 .header_action_btn button{
     background-color:rgb(0, 217, 255);
@@ -30,4 +45,15 @@
 }
 .header_action_btn :first-child{
     background-color: transparent !important;
+}
+.home{
+    background-image: url('../../Assets/images/Plane.jpg');
+    height: 50vh;
+}
+.home h2{
+    padding: 10px;
+    font-size: 40px; 
+}
+.home p{
+    margin-left: 20px;
 }
