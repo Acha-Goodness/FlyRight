@@ -5,6 +5,7 @@ import Home from './Component/Landing/Home';
 import Header from "./Component/Header/Header";
 import Login from "./Component/Login/Login";
 import CreateAccount from "./Component/CreateAccount/CreateAccount";
+import SearchFlight from './Component/SearchFlight/SearchFlight';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Header/>
           <Routes>
             <Route path="/" element={<Home/>}/>
+            <Route path="/searchFlight" element={<SearchFlight/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/createAccount" element={<CreateAccount/>}/>
           </Routes>
