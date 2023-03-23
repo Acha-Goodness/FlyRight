@@ -1,5 +1,5 @@
 .header_topbar{
-    background-color: rgb(0, 217, 255);
+    background-color: #00AFEF;
     color:white;
     padding:1% 0%;
     font-size: 12px;
@@ -38,7 +38,7 @@ font-size: 20px;
     margin-left: 3px;
 }
 .header_action_btn button{
-    background-color:rgb(0, 217, 255);
+    background-color:#00AFEF;
     padding:8px 30px;
     margin-left: 20px;
     border:none;

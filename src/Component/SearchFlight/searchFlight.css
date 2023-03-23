@@ -1,0 +1,27 @@
+.search_flight_select{
+    background-color:#00AFEF;
+}
+.search_flight_content{
+    display:flex;
+    justify-content: space-between;
+    margin:0 auto;
+    width:90%;
+    color:white;
+    padding:3% 0%;
+    align-items: center;
+}
+.search_flight_content button{
+    background-color: black;
+    width:10%;
+    color:white;
+    font-weight: bold;
+    border:none;
+    border-radius: 5px;
+    padding:1% 0%;
+}
+.search_fllgth_text{
+    font-weight: bold;
+    width:80%;
+    display: flex;
+    justify-content:space-between;
+}
