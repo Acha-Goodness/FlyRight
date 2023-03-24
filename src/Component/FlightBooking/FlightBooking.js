@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import "./flightBooking.css";
+import { useNavigate } from 'react-router-dom';
 import { IoMdAirplane, IoMdArrowDropdown } from "react-icons/io";
 import { BsPatchCheckFill } from "react-icons/bs";
 import { MdLocationPin, MdDateRange } from "react-icons/md";
@@ -8,31 +9,37 @@ import Axios from "axios";
 
 
 const FlightBooking = () => {
+  const navigate = useNavigate();
   const cities = [
     {
         id: 1,
-        name:"Lagos",
-        title:"Lagos, Nigeria"
+        name:"New York",
+        title:"New York, USA",
+        iata : "NYC"
     },
     {
         id: 2,
         name:"Dubia",
-        title:"Dubia, UAE"
+        title:"Dubia, UAE",
+        iata : "DXB"
     },
     {
         id: 3,
-        name:"Abuja",
-        title:"Abuja, Nigeria"
+        name:"Berlin",
+        title:"Berlin, Germany",
+        iata : "BER"
     },
     {
         id: 4,
         name:"London",
-        title:"London, United Kindom"
+        title:"London, United Kindom",
+        iata : "LON"
     },
     {
         id: 5,
         name:"Johannesburg",
-        title:"Johannesburg, South Africa"
+        title:"Johannesburg, South Africa",
+        iata : "JNB"
     }
 ]
 
@@ -44,6 +51,8 @@ let passenger = {
 
  const [ city, setCity ] = useState([]);
   const [ toCity, setToCity ] = useState([]);
+  const [ iata, setIata ] = useState([]);
+  const [ fromIata, setFromIata] = useState([]);
 
 const flightBookingData = {
     "tripType" : "",
@@ -83,6 +92,7 @@ const flightBookingData = {
     cities.forEach((ct) => {
         if(ct.id === id){
             setCity(ct.title)
+            setIata(ct.iata)
         }
     })
     setShowCities(!showCities);
@@ -92,6 +102,7 @@ const flightBookingData = {
     cities.forEach((ct) => {
         if(ct.id === id){
             setToCity(ct.title)
+            setFromIata(ct.iata)
         }
     })
     setShowCit(!showCit);
@@ -167,7 +178,7 @@ const flightBookingData = {
   })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Click is working")
 
@@ -175,15 +186,28 @@ const flightBookingData = {
         "tripType" : flightData.tripType,
         "numberOfPassenger" : total,
         "flightCategory" : flightData.flightCategory,
-        "from" : city,
-        "to" : toCity,
+        "origin" : iata,
+        "destination" : fromIata,
         "departureDateTime" : flightData.departureDateTime,
         "returnDateTime" : flightData.returnDateTime
     }
+    console.log( flightBookingData)
 
-    Axios.post(`${process.env.REACT_APP_API_ENDPOINT}/posts`, flightBookingData)
+    await Axios.post("https://jsonplaceholder.typicode.com/posts", flightBookingData)
          .then(res => {
             console.log(res)
+            res.status === 201 ? navigate("/searchFlight",
+            {state:{
+                from:city,
+                to:toCity,
+                departureDateTime:res.data.departureDateTime,
+                returnDateTime:res.data.returnDateTime,
+                flightCategory:res.data.flightCategory,
+                adult:user.adult,
+                children:user.children,
+                infants:user.infants
+            }}
+            ) : console.log("No available flight for this booking")
          }).catch(err => {
             console.log(err)
          })
