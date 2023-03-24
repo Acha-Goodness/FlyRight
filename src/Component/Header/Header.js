@@ -12,7 +12,7 @@ const Header = () => {
       <div className="header_navbar">
         <div className="header_navbar_text">
             <div className="header_logo">
-                <img src={FlyRight}/>
+                <Link to="/"><img src={FlyRight}/></Link>
             </div>
             <div className="header_menu">
                 <ul>
