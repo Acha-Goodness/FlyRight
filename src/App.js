@@ -7,6 +7,8 @@ import Login from "./Component/Login/Login";
 import CreateAccount from "./Component/CreateAccount/CreateAccount";
 import SearchFlight from './Component/SearchFlight/SearchFlight';
 import ForgotPassword from './Component/ForgotPassword/Forget';
+import Dashboard from './Component/Dashboard/Dashboard';
+import Otp from './Component/OTP/Otp';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
             <Route path="/login" element={<Login/>}/>
             <Route path="/createAccount" element={<CreateAccount/>}/>
             <Route path="/forgot" element={<ForgotPassword/>}/>
+            <Route path="/dash" element={<Dashboard/>}/>
+            <Route path="/otp" element={<Otp/>}/>
           </Routes>
       </Router>
     </div>

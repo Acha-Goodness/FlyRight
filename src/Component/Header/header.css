@@ -45,7 +45,13 @@ font-size: 20px;
     border-radius: 5px;
     font-weight: bold;
     color: white;
+    cursor: pointer;
+}
+.header_action_btn button:hover{
+    background-color:#095c7a;
+
 }
 .login_btn{
     background-color: transparent !important;
+    cursor: pointer;
 }

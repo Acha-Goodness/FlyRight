@@ -1,5 +1,5 @@
 .login {
-  background-color: rgb(0, 217, 255);
+  background-color:#00AFEF;
   padding-bottom: 6.5%;
 }
 .login_text h1 {
@@ -41,21 +41,22 @@
   border-right-style: none;
   border-left-style: none;
   border-bottom-style: groove;
+  
 }
 .login_form h3 {
-  color: rgb(0, 217, 255);
+  color: #00AFEF;
 }
 span {
-  color: rgb(0, 217, 255);
+  color: #00AFEF;
 }
 .pword p {
-  color: rgb(0, 217, 255);
+  color: #00AFEF;
   margin-top: 10px;
   margin-left: 90px;
 }
 .pword {
-  margin-left: 100px;
-  color: rgb(0, 217, 255);
+  margin-left: 150px;
+  color:#00AFEF;
 }
 .pword a {
   text-decoration: none;
@@ -63,8 +64,7 @@ span {
 .bt {
   color: white;
   margin-left: 50px;
-  background-color: rgb(0, 217, 255);
-  border-radius: 10px;
+  background-color: #00AFEF; 
   padding: 10px;
   width: 70%;
   border-radius: 5px;

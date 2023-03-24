@@ -1,5 +1,5 @@
 .signup {
-  background-color: rgb(0, 217, 255);
+  background-color: #00AFEF;
   padding-bottom: 20px;
 }
 .signup_text h1 {
@@ -58,7 +58,7 @@
   border-bottom-style: groove;
 }
 .signup_form h3 {
-  color: rgb(0, 217, 255);
+  color:#00AFEF;
 }
 
 span {
@@ -67,7 +67,7 @@ span {
 .btn {
   color: white;
   margin-left: 70px;
-  background-color: rgb(0, 217, 255);
+  background-color:#00AFEF;
   padding: 10px;
   width: 60%;
   border-radius: 5px;
