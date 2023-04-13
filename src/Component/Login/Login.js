@@ -16,7 +16,8 @@ function LogIn() {
 
   const navigate = useNavigate();
 
-  const baseUrl ="https://89c0-154-113-161-137.ngrok-free.app/api/v1/passenger/login";
+  const baseUrl =
+    "https://2aea-154-113-161-131.ngrok-free.app/api/v1/passenger/login";
 
     const postRegData = {
       emailAddress,

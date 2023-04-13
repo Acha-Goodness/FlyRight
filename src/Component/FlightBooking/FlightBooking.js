@@ -185,7 +185,8 @@ const flightBookingData = {
   })
   }
 
-  const flightApi = "https://89c0-154-113-161-137.ngrok-free.app/api/v1/get-flights";
+  const flightApi =
+    "https://2aea-154-113-161-131.ngrok-free.app/api/v1/get-flights";
 //   "https://jsonplaceholder.typicode.com/posts";
 
   const handleSubmit = (e) => {
