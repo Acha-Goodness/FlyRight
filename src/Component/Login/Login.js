@@ -10,11 +10,27 @@ function LogIn() {
 
   const navigate = useNavigate();
 
-  const baseUrl = "https://a88c-197-210-226-84.eu.ngrok.io/api/v1/passenger/login";
+
+  const baseUrl ="https://09bc-102-88-62-63.ngrok-free.app/api/v1/passenger/login";
+
+  const  validateRegister = () => {
+
+    if (emailAddress && password !== "") {
+      console.log("alerting");
+      return true
+    }else{
+      alert("Fields cannot be empty")
+    }
+    return false;
+  }
 
   const postLoginData = (e) => {
     e.preventDefault();
-    // navigate("/");
+
+        let validateResult = validateRegister();
+
+    if (validateResult === false) return; 
+
     Axios.post(baseUrl, {
       emailAddress,
       password,
@@ -22,7 +38,7 @@ function LogIn() {
       .then((res) => {
         console.log(res.data);
 
-        res.data.isSuccessful && navigate("/dash");
+        res.data.isSuccessful && navigate("/");
       })
       .catch((error) => {
         console.log(error);

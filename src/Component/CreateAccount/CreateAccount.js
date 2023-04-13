@@ -12,6 +12,17 @@ function CreateAccount() {
   const [password, setPassword] = useState([]);
   const [error, setError] = useState(null);
 
+
+  const  validateRegister = () => {
+ if (firstName && lastName && emailAddress && phoneNumber && password !== "") {
+      alert("alerting");
+      return true
+    }else{
+      alert("Fields cannot be empty")
+    }
+    return false;
+  }
+
   const navigate = useNavigate();
 
   //const location = useLocation();
@@ -25,12 +36,30 @@ function CreateAccount() {
 
   const postData = (e) => {
     e.preventDefault();
+    // fetch(baseUrl, {
+    //   "method": "POST",
+    //   "Content-Type": "application/json",
+    //   "body":{
+    //   firstName,
+    //   lastName,
+    //   emailAddress,
+    //   phoneNumber,
+    //   password,
+    //   }     
+    // }).then(res => res.json())
+    // .then(data => console.log(data))
+    // .catch(err => console.log(err));
+    let validateResult = validateRegister();
+
+    if (validateResult === false) return; 
     Axios.post(baseUrl, {
+
       "firstName": firstName,
       "lastName":lastName,
       "emailAddress":emailAddress,
       "phoneNumber":phoneNumber,
       "password":password,
+
     })
       .then((res) => {
         console.log(res.data);
@@ -43,11 +72,11 @@ function CreateAccount() {
         console.log(error);
       });
 
-    setFirstName("");
-    setLastName("");
-    setEmailAddress("");
-    setPhoneNumber("");
-    setPassword("");
+    // setFirstName("");
+    // setLastName("");
+    // setEmailAddress("");
+    // setPhoneNumber("");
+    // setPassword("");
   };
   
   const [errors, setErrors] = useState({

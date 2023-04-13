@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Otp.css";
 import axios from "axios";
+
 import { useNavigate, useLocation } from "react-router-dom";
 
 function Otp() {
@@ -9,7 +10,7 @@ function Otp() {
   const [thirdinput, setThirdInput] = useState("");
   const [fourthinput, setFourthInput] = useState("");
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const location = useLocation();
   // tokenPath = location.pathname
