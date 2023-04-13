@@ -1,6 +1,6 @@
 import React from 'react';
 import "./searchFlight.css";
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const SearchFlight = () => {
   const location = useLocation();
@@ -87,11 +87,11 @@ const SearchFlight = () => {
                       <p>{flightDetails.to}</p>
                     </div>
                     <div>
-                      <p>Dapartture Date and Time</p>
+                      <p>Departure Date and Time</p>
                       <p>{flightDetails.departureDateTime}</p>
                     </div>
                     <div>
-                      <p>Dapartture return and Time</p>
+                      <p>Departure return and Time</p>
                       <p>{flightDetails.returnDateTime}</p>
                     </div>
                     
@@ -114,7 +114,7 @@ const SearchFlight = () => {
                       <p>{flightDetails.flightCategory}</p>
                     </div>
                 </div>
-                <button>Edit</button>
+                <button className='edit'><Link to="/">Edit</Link></button>
             </div>
         </div>
         <div className="air">
