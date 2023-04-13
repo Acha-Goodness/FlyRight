@@ -1,7 +1,6 @@
 import React from 'react'
 import "./Dashboard.css";
 import {Link} from "react-router-dom";
-import Planes from "../../Assets/images/Planes.jpg";
 
 const Dashboard = () => {
   return (<div>

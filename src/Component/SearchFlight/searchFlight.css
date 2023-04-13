@@ -38,9 +38,12 @@
     border-radius: 5px;
     padding:1% 0%;
 }
+.air{
+    display: flex;
+}
 .air_lines{
     font-weight: bold;
-    width:90%;
+    width:98%;
     box-sizing: border-box;
     background:rgb(217, 243, 248);
     display:flex;
@@ -65,4 +68,14 @@
 .air_line_price{
     font-weight: bold;
     color:white;
+}
+.air_available_flight{
+    width:100%;
+}
+.air_flight_details{
+    margin:0.5% 0%;
+    width:40%;
+}
+.hideAirDetails{
+    display:none;
 }
