@@ -1,52 +1,47 @@
 import React from "react";
 import "./createAccount.css";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Axios from "axios";
 
 function CreateAccount() {
-  const [firstName, setFirstName] = useState([]);
-  const [lastName, setLastName] = useState([]);
-  const [emailAddress, setEmailAddress] = useState([]);
-  const [phoneNumber, setPhoneNumber] = useState([]);
-  const [password, setPassword] = useState([]);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [emailAddress, setEmailAddress] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [password, setPassword] = useState("");
 
-
-  const  validateRegister = () => {
- if (firstName && lastName && emailAddress && phoneNumber && password !== "") {
-      alert("alerting");
-      return true
-    }else{
-      alert("Fields cannot be empty")
-    }
-    return false;
-  }
+  
 
   const navigate = useNavigate();
-  // const [selectedValue, setSelectedValue] = useState("");
 
-  // const baseUrl = "http://localhost:8080/api/v1/passenger/register";
-  const baseUrl = "https://09bc-102-88-62-63.ngrok-free.app/api/v1/passenger/register";
-  // const baseUrl = "https://jsonplaceholder.typicode.com/posts";
+
+  const baseUrl = "https://89c0-154-113-161-137.ngrok-free.app/api/v1/passenger/register";
+
+  const postRegData = {
+      firstName,lastName, emailAddress, phoneNumber, password
+  }
+
+  const validateRegData = () => {
+    const regex = /\d+/;
+    if (regex.test(postRegData.lastName) || regex.test(postRegData.firstName)) {
+      alert("Numbers are not allowed in firstname and lastname fields");
+      return false;
+    }
+  for (let key in postRegData){
+    if(postRegData[key] === ""){
+      alert(`${key} cannot be empty`)
+      return false
+    }
+  }
+  }
 
   const postData = (e) => {
     e.preventDefault();
-    // fetch(baseUrl, {
-    //   "method": "POST",
-    //   "Content-Type": "application/json",
-    //   "body":{
-    //   firstName,
-    //   lastName,
-    //   emailAddress,
-    //   phoneNumber,
-    //   password,
-    //   }     
-    // }).then(res => res.json())
-    // .then(data => console.log(data))
-    // .catch(err => console.log(err));
-    let validateResult = validateRegister();
 
-    if (validateResult === false) return; 
+    const valResult = validateRegData()
+    console.log(`logging val result ${valResult}`);
+    if (valResult === false) return;
     Axios.post(baseUrl, {
       firstName,
       lastName,
@@ -61,20 +56,10 @@ function CreateAccount() {
         // res.data.isSuccessful && navigate("/otp");
       })
       .catch((error) => {
-        console.log(error);
+        alert(error);
       });
-
-    // setFirstName("");
-    // setLastName("");
-    // setEmailAddress("");
-    // setPhoneNumber("");
-    // setPassword("");
   };
 
-  // const handleChange = (event) => {
-  //   setSelectedValue(event.target.value);
-  //   console.log("Selected option value: " + event.target.value);
-  // };
 
   return (
     <div className="signup">
@@ -108,7 +93,7 @@ function CreateAccount() {
           />
 
           <input
-            type="tel"
+            type="number"
             value={phoneNumber}
             name="phone"
             pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"

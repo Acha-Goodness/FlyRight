@@ -1,47 +1,69 @@
 import React, { useState } from "react";
 import "./login.css";
 import { Link, useNavigate } from "react-router-dom";
+import { LoggedContext } from "../../App";
+import { useContext } from "react";
 import Axios from "axios";
 
 function LogIn() {
-  const [emailAddress, setEmailAddress] = useState([]);
-  const [password, setPassword] = useState([]);
+  const [emailAddress, setEmailAddress] = useState("");
+  const [password, setPassword] = useState("");
+
+      
+  
+  const { checkUser, setCheckUser } = useContext(LoggedContext);
+  
 
   const navigate = useNavigate();
 
-  const baseUrl ="https://09bc-102-88-62-63.ngrok-free.app/api/v1/passenger/login";
+  const baseUrl ="https://89c0-154-113-161-137.ngrok-free.app/api/v1/passenger/login";
 
-  const  validateRegister = () => {
+    const postRegData = {
+      emailAddress,
+      password,
+    };
 
-    if (emailAddress && password !== "") {
-      console.log("alerting");
-      return true
-    }else{
-      alert("Fields cannot be empty")
-    }
-    return false;
-  }
+
+   const validateRegData = () => {
+
+     for (let key in postRegData) {
+       if (postRegData[key] === "") {
+         alert(`${key} cannot be empty`);
+         return false;
+       }
+     }
+   };
+
 
   const postLoginData = (e) => {
     e.preventDefault();
 
-        let validateResult = validateRegister();
+   const valResult = validateRegData();
+   console.log(`logging val result ${valResult}`);
+   if (valResult === false) return;
 
-    if (validateResult === false) return; 
+   console.log("hitting server");
     Axios.post(baseUrl, {
       emailAddress,
       password,
     })
       .then((res) => {
-        console.log(res.data);
+        console.log(res.data["data"].message);
 
-        res.data.isSuccessful && navigate("/");
+        if (res.data["data"].statusCode !== "OK") {
+          alert(res.data["data"].message);
+        }else{
+          alert(res.data["data"].message);
+          setCheckUser(res.data["data"].loggedIn);
+          res.data.isSuccessful && navigate("/");
+        }
+
       })
       .catch((error) => {
-        console.log(error);
+        alert(error);
       });
-    setEmailAddress("");
-    setPassword("");
+    // setEmailAddress("");
+    // setPassword("");
   };
 
   return (

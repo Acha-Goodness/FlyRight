@@ -4,29 +4,35 @@ import EditFlight from '../FlightBooking/EditFlight';
 import { useLocation } from 'react-router-dom';
 import ViewFlightDetails from './ViewFlightDetails/ViewFlightDetails';
 import { useGet } from '../../Utils/Hooks';
+import { useEffect } from 'react';
 
 const SearchFlight = () => {
   const location = useLocation();
-  const [availableFlight] = useGet("http://localhost:8000/flight");
+  const [details, setDetails] = useState([]);
 
-  let flightDetails;
+useEffect(() => {
+    setDetails(location.state.flightData);
+},[])
+  // const [availableFlight] = useGet("http://localhost:8000/flight");
 
-    if(location.state !== null){
-      flightDetails = {
-        from:location.state.booking.from,
-        to:location.state.booking.to,
-        departureDateTime:location.state.booking.departureDateTime,
-        returnDateTime:location.state.booking.returnDateTime,
-        flightCategory:location.state.booking.flightCategory,
-        adult:location.state.booking.adult,
-        children:location.state.booking.children,
-        infants:location.state.booking.infants
-      }
-      // for(var x = 0; x <= 10; x++){
-      //   console.log(location.state.airLines)
-      //   setAvailableFlight(location.state.airLines)
-      // }
-    }
+  // let flightDetails;
+
+  //   if(location.state !== null){
+  //     flightDetails = {
+  //       from:location.state.booking.from,
+  //       to:location.state.booking.to,
+  //       departureDateTime:location.state.booking.departureDateTime,
+  //       returnDateTime:location.state.booking.returnDateTime,
+  //       flightCategory:location.state.booking.flightCategory,
+  //       adult:location.state.booking.adult,
+  //       children:location.state.booking.children,
+  //       infants:location.state.booking.infants
+  //     }
+  //     // for(var x = 0; x <= 10; x++){
+  //     //   console.log(location.state.airLines)
+  //     //   setAvailableFlight(location.state.airLines)
+  //     // }
+  //   }
        
   const [ showEdit, setShowEdit ] = useState(false);
   const [ showAirView, setShowAirVies ] = useState(false);
@@ -50,7 +56,7 @@ const SearchFlight = () => {
   }
   return (
     <div className="search_flight">
-        <div className="search_flight_select">
+      {/* <div className="search_flight_select">
             { showEdit === true ? <EditFlight cancelEdit={cancelEdit}/> : <div className="search_flight_content">
                 <div className="search_fllgth_text">
                     <div>
@@ -90,13 +96,30 @@ const SearchFlight = () => {
                     </div>
                 </div>
                 <button onClick={handleEdit}>Edit</button>
-            </div>}
+            </div>} 
 
-        </div>
-        <div className="air">
-          <div className="air_available_flight">
-          
-          {availableFlight && availableFlight.slice(0, 5).map((air, index) => {
+       </div> */}
+      <div className="air">
+        <div className="air_available_flight">
+          {details.map((data, index) => (
+            <div className="air_lines">
+              <p>{data.main_airline}</p>
+              <div>
+                <p>{data.depart_date}</p>
+                <p>{data.origin}</p>
+                <div>
+                  <p>{data.found_at}</p>
+                  <p>{data.destination}</p>
+                </div>
+                <div className="air_line_price">
+                  <p>N {data.price * 760}.00</p>
+                  <button onClick={() => toggleAirView(data.index)}>View</button>
+                </div>
+              </div>
+            </div>
+          ))}
+
+          {/* {availableFlight && availableFlight.slice(0, 5).map((air, index) => {
             return <div key={index} className="air_lines">
                       <p>{air.Name}</p>
                       <div>
@@ -112,14 +135,14 @@ const SearchFlight = () => {
                         <button onClick={() => toggleAirView(air.id)}>View</button>
                       </div>
                     </div>
-          })}
-          </div>
-          <div className={ showAirView ? "air_flight_details" : "hideAirDetails" }>
-              <ViewFlightDetails airId={airLineId} closeView={closeAirView}/>
-          </div>
+          })} */}
         </div>
+        <div className={showAirView ? "air_flight_details" : "hideAirDetails"}>
+          <ViewFlightDetails airId={airLineId} closeView={closeAirView} />
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
 export default SearchFlight;

@@ -9,10 +9,20 @@ import SearchFlight from './Component/SearchFlight/SearchFlight';
 import ForgotPassword from './Component/ForgotPassword/Forget';
 import Dashboard from './Component/Dashboard/Dashboard';
 import Otp from './Component/OTP/Otp';
+import { createContext } from 'react';
+import { useState } from 'react';
+
+
+export const LoggedContext = createContext();
 
 function App() {
+
+  const [checkUser, setCheckUser] = useState(null);
+
+
   return (
     <div className="App">
+      <LoggedContext.Provider value={{checkUser, setCheckUser}}>
       <Router>
           <Header/>
           <Routes>
@@ -25,6 +35,7 @@ function App() {
             <Route path="/otp" element={<Otp/>}/>
           </Routes>
       </Router>
+      </LoggedContext.Provider>
     </div>
   );
 }
