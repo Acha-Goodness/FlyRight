@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import "./searchFlight.css";
-import EditFlight from '../FlightBooking/EditFlight';
 import { useLocation } from 'react-router-dom';
 import ViewFlightDetails from './ViewFlightDetails/ViewFlightDetails';
-import { useGet } from '../../Utils/Hooks';
 import { useEffect } from 'react';
 
 const SearchFlight = () => {
@@ -68,11 +66,13 @@ useEffect(() => {
                       <p>{flightDetails.to}</p>
                     </div>
                     <div>
+
                       <p>Daparture Date</p>
                       <p>{flightDetails.departureDateTime}</p>
                     </div>
                     <div>
                       <p>Return Date</p>
+
                       <p>{flightDetails.returnDateTime}</p>
                     </div>
                     
@@ -95,6 +95,7 @@ useEffect(() => {
                       <p>{flightDetails.flightCategory}</p>
                     </div>
                 </div>
+
                 <button onClick={handleEdit}>Edit</button>
             </div>} 
 

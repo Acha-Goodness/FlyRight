@@ -45,7 +45,7 @@
   border-left-style: none;
   border-bottom-style: groove;
 }
-#select {
+#selects {
   padding: 8px 10px 10px 5px;
   border: none;
   width: 60%;
@@ -74,4 +74,16 @@ span {
   margin-top: 20px;
   margin-bottom: 20px;
   border: none;
+}
+.email{
+  color: red;
+  margin-left: 140px;
+  font-size: 15px;
+  margin-top: 2px;
+}
+.pass{
+ color: red;
+ margin-top: 2px;
+ margin-left: 60px;
+ font-size: 15px;
 }

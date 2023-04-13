@@ -1,7 +1,7 @@
 import React from "react";
 import "./createAccount.css";
 import { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Axios from "axios";
 
 function CreateAccount() {
@@ -14,8 +14,6 @@ function CreateAccount() {
   
 
   const navigate = useNavigate();
-
-
   const baseUrl =
     "https://2aea-154-113-161-131.ngrok-free.app/api/v1/passenger/register";
 
@@ -44,21 +42,88 @@ function CreateAccount() {
     console.log(`logging val result ${valResult}`);
     if (valResult === false) return;
     Axios.post(baseUrl, {
-      firstName,
-      lastName,
-      emailAddress,
-      phoneNumber,
-      password,
+
+      "firstName": firstName,
+      "lastName":lastName,
+      "emailAddress":emailAddress,
+      "phoneNumber":phoneNumber,
+      "password":password,
+
     })
       .then((res) => {
         console.log(res.data);
-        res.data.isSuccessful && navigate("/login");
+        // res.data.isSuccessful && navigate("/login");
+        
 
-        // res.data.isSuccessful && navigate("/otp");
+        res.data.isSuccessful && navigate("/otp", {state:{email:emailAddress}});
       })
       .catch((error) => {
         alert(error);
       });
+  };
+  
+  const [errors, setErrors] = useState({
+    firstName: "",
+    lastName: "",
+    emailAddress: "",
+    phoneNumber: "",
+    password: "",
+  });
+  const validateInput = (field, value) => {
+    switch (field) {
+      case " firstName":
+        if (value.length === 0) {
+          setErrors((errors) => ({
+            ...errors,
+            firstName: "First Name is required",
+          }));
+        } else {
+          setErrors((errors) => ({ ...errors, firstName: "" }));
+        }
+        break;
+      case "lastName":
+        if (value.length === 0) {
+          setErrors((errors) => ({
+            ...errors,
+            lastName: "Last Name is required",
+          }));
+        } else {
+          setErrors((errors) => ({ ...errors, lastName: "" }));
+        }
+        break;
+      case "emailAddress":
+        if (!value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
+          setErrors((errors) => ({
+            ...errors,
+            emailAddress: "Email Address is invalid",
+          }));
+        } else {
+          setErrors((errors) => ({ ...errors, emailAddress: "" }));
+        }
+        break;
+      case "phonenumber":
+        if (value.length < 11) {
+          setErrors((errors) => ({
+            ...errors,
+            phoneNumber: "Phonenumber is invalid",
+          }));
+        } else {
+          setErrors((errors) => ({ ...errors, phoneNumber: "" }));
+        }
+        break;
+      case "password":
+        if (value.length < 8) {
+          setErrors((errors) => ({
+            ...errors,
+            password: "Password must be at least 8 characters",
+          }));
+        } else {
+          setErrors((errors) => ({ ...errors, password: "" }));
+        }
+        break;
+      default:
+        break;
+    }
   };
 
 
@@ -71,39 +136,57 @@ function CreateAccount() {
           <input
             type="text"
             value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-            required
+            onChange={(e) => {
+              setFirstName(e.target.value);
+              validateInput("firstName", e.target.value);
+            }}
+         
             placeholder="Firstname"
+            required
           />
+          <div className="email">{errors.firstName}</div>
 
           <input
             type="text"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            required
+            onChange={(e) => {
+              setLastName(e.target.value);
+              validateInput("lastName", e.target.value);
+            }}
             placeholder="Lastname"
+            required
           />
+          <div className="email">{errors.lastName}</div>
 
           <input
             type="email"
             name="email"
             value={emailAddress}
-            onChange={(e) => setEmailAddress(e.target.value)}
-            required
+            onChange={(e) => {
+              setEmailAddress(e.target.value);
+              validateInput("emailAddress", e.target.value);
+            }}
+          
             placeholder="EmailAddress"
+            required
           />
+          <div className="email">{errors.emailAddress}</div>
 
           <input
             type="number"
             value={phoneNumber}
             name="phone"
             pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-            onChange={(e) => setPhoneNumber(e.target.value)}
-            required
+            onChange={(e) => {
+              setPhoneNumber(e.target.value);
+              validateInput("phoneNumber", e.target.value);
+            }}
+          
             placeholder="Phonenumber"
+            required
           />
+          <div className="email">{errors.phoneNumber}</div>
 
-          <select id="select">
+          <select id="selects">
             <option>Role</option>
             <option>Passenger</option>
             <option>Travel Agent</option>
@@ -112,10 +195,15 @@ function CreateAccount() {
           <input
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
+            onChange={(e) => {
+              setPassword(e.target.value);
+              validateInput("password", e.target.value);
+            }}
+            
             placeholder="Password"
+            required
           />
+          <div className="pass">{errors.password}</div>
 
           <button className="btn" onClick={postData}>
             Create Account

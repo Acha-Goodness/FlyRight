@@ -11,7 +11,9 @@ import Dashboard from './Component/Dashboard/Dashboard';
 import Otp from './Component/OTP/Otp';
 import { createContext } from 'react';
 import { useState } from 'react';
-
+import Payment from './Component/Payment/Payment';
+import ResetPassword from './Component/ResetPassword/ResetPassword';
+import AdditionalInfo from './Component/AdditionalInfo/AdditionalInfo';
 
 export const LoggedContext = createContext();
 
@@ -25,6 +27,7 @@ function App() {
       <LoggedContext.Provider value={{checkUser, setCheckUser}}>
       <Router>
           <Header/>
+          
           <Routes>
             <Route path="/" element={<Home/>}/>
             <Route path="/searchFlight" element={<SearchFlight/>}/>
@@ -33,6 +36,11 @@ function App() {
             <Route path="/forgot" element={<ForgotPassword/>}/>
             <Route path="/dash" element={<Dashboard/>}/>
             <Route path="/otp" element={<Otp/>}/>
+            <Route path="/payment" element={<Payment/>}/>
+            <Route path="/reset" element={<ResetPassword/>}/>
+            <Route path="/info" element={<AdditionalInfo/>}/>
+
+            
           </Routes>
       </Router>
       </LoggedContext.Provider>

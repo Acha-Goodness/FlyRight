@@ -13,7 +13,6 @@ function LogIn() {
   
   const { checkUser, setCheckUser } = useContext(LoggedContext);
   
-
   const navigate = useNavigate();
 
   const baseUrl =
@@ -66,11 +65,42 @@ function LogIn() {
     // setEmailAddress("");
     // setPassword("");
   };
+  const [errors, setErrors] = useState({
+    emailAddress: "",
+    password: "",
+  });
+
+  const validateInput = (field, value) => {
+    switch (field) {
+      case "emailAddress":
+        if (!value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
+          setErrors((errors) => ({
+            ...errors,
+            emailAddress: "Email Address is invalid",
+          }));
+        } else {
+          setErrors((errors) => ({ ...errors, emailAddress: "" }));
+        }
+        break;
+
+      case "password":
+        if (value.length < 8) {
+          setErrors((errors) => ({
+            ...errors,
+            password: "Password must be at least 8 characters",
+          }));
+        } else {
+          setErrors((errors) => ({ ...errors, password: "" }));
+        }
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <div className="login">
       <div className="login_text">
-    
         <h3>Login to make your reservations</h3>
 
         <form className="login_form">
@@ -78,27 +108,33 @@ function LogIn() {
             type="email"
             name="email"
             value={emailAddress}
-            onChange={(e) => setEmailAddress(e.target.value)}
-            required
+            onChange={(e) => {
+              setEmailAddress(e.target.value);
+              validateInput("emailAddress", e.target.value);
+            }}
             placeholder="EmailAddress"
+            required
           />
+           <div className="emails">{errors.emailAddress}</div>
 
           <input
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
+            onChange={(e) => {
+              setPassword(e.target.value);
+              validateInput("password", e.target.value);
+            }}
             placeholder="Password"
             name="password"
+            required
           />
+          <div className="pass">{errors.password}</div>
 
           <div className="pword">
             <Link to="/forgot">
               <span>Forgot Password?</span>
             </Link>
           </div>
-
-          <h2></h2>
           <button className="bt" onClick={postLoginData}>
             Log In
           </button>
