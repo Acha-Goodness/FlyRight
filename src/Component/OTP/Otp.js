@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Otp.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 function Otp() {
   const [firstinput, setFirstInput] = useState("");
@@ -9,7 +9,7 @@ function Otp() {
   const [thirdinput, setThirdInput] = useState("");
   const [fourthinput, setFourthInput] = useState("");
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
 //   let inputTab = (element) => {
 //     if (element.key === "Delete" || element.key === "Backspace") {

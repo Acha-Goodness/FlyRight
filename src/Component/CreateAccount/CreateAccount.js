@@ -8,22 +8,50 @@ function CreateAccount() {
   const [firstName, setFirstName] = useState([]);
   const [lastName, setLastName] = useState([]);
   const [emailAddress, setEmailAddress] = useState([]);
-  const [phonenumber, setPhoneNumber] = useState([]);
+  const [phoneNumber, setPhoneNumber] = useState([]);
   const [password, setPassword] = useState([]);
+
+
+  const  validateRegister = () => {
+ if (firstName && lastName && emailAddress && phoneNumber && password !== "") {
+      alert("alerting");
+      return true
+    }else{
+      alert("Fields cannot be empty")
+    }
+    return false;
+  }
 
   const navigate = useNavigate();
   // const [selectedValue, setSelectedValue] = useState("");
 
-  const baseUrl = "http://localhost:8080/api/v1/passenger/register";
+  // const baseUrl = "http://localhost:8080/api/v1/passenger/register";
+  const baseUrl = "https://09bc-102-88-62-63.ngrok-free.app/api/v1/passenger/register";
   // const baseUrl = "https://jsonplaceholder.typicode.com/posts";
 
   const postData = (e) => {
     e.preventDefault();
+    // fetch(baseUrl, {
+    //   "method": "POST",
+    //   "Content-Type": "application/json",
+    //   "body":{
+    //   firstName,
+    //   lastName,
+    //   emailAddress,
+    //   phoneNumber,
+    //   password,
+    //   }     
+    // }).then(res => res.json())
+    // .then(data => console.log(data))
+    // .catch(err => console.log(err));
+    let validateResult = validateRegister();
+
+    if (validateResult === false) return; 
     Axios.post(baseUrl, {
       firstName,
       lastName,
       emailAddress,
-      phonenumber,
+      phoneNumber,
       password,
     })
       .then((res) => {
@@ -36,11 +64,11 @@ function CreateAccount() {
         console.log(error);
       });
 
-    setFirstName("");
-    setLastName("");
-    setEmailAddress("");
-    setPhoneNumber("");
-    setPassword("");
+    // setFirstName("");
+    // setLastName("");
+    // setEmailAddress("");
+    // setPhoneNumber("");
+    // setPassword("");
   };
 
   // const handleChange = (event) => {
@@ -81,7 +109,7 @@ function CreateAccount() {
 
           <input
             type="tel"
-            value={phonenumber}
+            value={phoneNumber}
             name="phone"
             pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
             onChange={(e) => setPhoneNumber(e.target.value)}

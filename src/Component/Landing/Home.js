@@ -17,21 +17,21 @@ function Home() {
         </div>
         <div className="bonus">
             <div className="bag">
-                <img src={blueRibbon}/>
+                <img src={blueRibbon} alt="Blue Ribbon"/>
                 <div className="bag_content">
                   <h3>Blue Ribbon</h3>
                   <p>We offer global baggage protection on all site</p>
                 </div>
             </div>
             <div className="bag">
-                <img src={protocol}/>
+                <img src={protocol} alt="Protocol"/>
                 <div className="bag_content">
                   <h3>Protocol Service</h3>
                   <p>We offer global baggage protection on all site</p>
                 </div>
             </div>
             <div className="bag">
-                <img src={visa}/>
+                <img src={visa} alt="Visa"/>
                 <div className="bag_content">
                   <h3>Visa Assistance</h3>
                   <p>We offer global baggage protection on all site</p>
