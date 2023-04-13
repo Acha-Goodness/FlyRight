@@ -7,6 +7,25 @@ import { MdLocationPin, MdDateRange } from "react-icons/md";
 import { FaSyncAlt, FaUser, FaPlusCircle, FaMinusCircle } from "react-icons/fa";
 import { useGet } from '../../Utils/Hooks';
 import  Axios  from 'axios';
+import { useContext } from 'react';
+import { LoggedContext } from '../../App';
+
+
+
+
+// {state:{
+//                 booking:{
+//                         from:city,
+//                         to:toCity,
+//                         departureDateTime:flightData.departureDateTime,
+//                         returnDateTime:flightData.returnDateTime,
+//                         flightCategory:flightData.flightCategory,
+//                         adult:user.adult,
+//                         children:user.children,
+//                         infants:user.infants
+//                         },
+//                 // airLines:res["data"].data.prices
+//                 }
 
 
 const FlightBooking = () => {
@@ -14,7 +33,6 @@ const FlightBooking = () => {
 const [cities] = useGet("http://localhost:8000/cities");
 
 const navigate = useNavigate();
-
 
 
 let passenger = {
@@ -27,6 +45,8 @@ let passenger = {
   const [ toCity, setToCity ] = useState([]);
   const [ iata, setIata ] = useState([]);
   const [ fromIata, setFromIata] = useState([]);
+
+const {checkUser, setCheckUser} = useContext(LoggedContext);
 
 const flightBookingData = {
     "tripType" : "",
@@ -105,6 +125,15 @@ const flightBookingData = {
     }
   }
 
+   const validateRegData = (postRegData) => {
+     for (let key in postRegData) {
+       if (postRegData[key] === "") {
+         alert(`${key} cannot be empty`);
+         return false;
+       }
+     }
+   };
+
 
   const countDown = (id) => {
     if(id === 1){
@@ -156,9 +185,18 @@ const flightBookingData = {
   })
   }
 
+  const flightApi =
+    "https://2aea-154-113-161-131.ngrok-free.app/api/v1/get-flights";
+//   "https://jsonplaceholder.typicode.com/posts";
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Click is working")
+    
+    if (checkUser === null){
+        alert("kindly log in to access flight data")
+        console.log("hi hi");
+        return
+    }
 
     const flightBookingData = {
         "tripType" : flightData.tripType,
@@ -169,28 +207,24 @@ const flightBookingData = {
         "departureDateTime" : flightData.departureDateTime,
         "returnDateTime" : flightData.returnDateTime
     }
+    const valResult = validateRegData(flightBookingData);
+    console.log(`logging val result ${valResult}`);
+    if (valResult === false) return;
+
     setDateErrMsg(validateDate(flightBookingData.departureDateTime, flightBookingData.returnDateTime))
     console.log("2." + isValid)
 
+    console.log(flightBookingData);
+
     if(isValid === true){
-        Axios.post("https://jsonplaceholder.typicode.com/posts", flightBookingData)
+        Axios.post(flightApi, {origin:flightBookingData.origin, destination:flightBookingData.destination})
         .then(res => {
-            // console.log(res["data"].data.prices)
-            res.status === 201 ? navigate("/searchFlight",
-            {state:{
-                booking:{
-                        from:city,
-                        to:toCity,
-                        departureDateTime:flightData.departureDateTime,
-                        returnDateTime:flightData.returnDateTime,
-                        flightCategory:flightData.flightCategory,
-                        adult:user.adult,
-                        children:user.children,
-                        infants:user.infants
-                        },
-                // airLines:res["data"].data.prices
-                }
+            console.log(res);
+            console.log(res["data"].data.prices)
+            res.status === 200 ? navigate("/searchFlight",{
+                state: {flightData: res["data"].data.prices}
             }
+            
         ):console.log("an error occur")
     }).catch(err => {
         console.log(err)
@@ -224,7 +258,7 @@ const flightBookingData = {
           </div>
           <div className="flight_booking_field">
     
-         <form onSubmit={handleSubmit}>
+         <form>
             <div>
                 <div className='form_one'>
                     <div className="form_one_option">
@@ -234,6 +268,7 @@ const flightBookingData = {
                             </div>
                             <div>
                                 <select name="tripType" value={flightData.tripType} onChange={handleChange} >
+                                    <option value="" disabled selected>--Choose your trip type--</option>
                                     <option>Round-Trip</option>
                                     <option>One-Way</option>
                                     <option>Mulltiple-City</option>
@@ -282,6 +317,7 @@ const flightBookingData = {
                         </div>
                         <div>
                             <select name="flightCategory" value={flightData.flightCategory} onChange={handleChange}>
+                                  <option value="" disabled selected>--Choose your flight type--</option>
                                 <option>Premium Economy</option>
                                 <option>Economy</option>
                                 <option>Business Class</option>

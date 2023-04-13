@@ -10,7 +10,7 @@ function Otp() {
   const [thirdinput, setThirdInput] = useState("");
   const [fourthinput, setFourthInput] = useState("");
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const location = useLocation();
   // tokenPath = location.pathname
