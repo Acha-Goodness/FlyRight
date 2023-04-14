@@ -16,7 +16,7 @@ function LogIn() {
   const navigate = useNavigate();
 
   const baseUrl =
-    "https://2aea-154-113-161-131.ngrok-free.app/api/v1/passenger/login";
+    "https://ce99-102-88-62-64.ngrok-free.app/api/v1/passenger/login";
 
     const postRegData = {
       emailAddress,
@@ -60,7 +60,7 @@ function LogIn() {
 
       })
       .catch((error) => {
-        alert(error);
+      alert(error.message);
       });
     // setEmailAddress("");
     // setPassword("");
@@ -130,11 +130,11 @@ function LogIn() {
           />
           <div className="pass">{errors.password}</div>
 
-          <div className="pword">
+          {/* <div className="pword">
             <Link to="/forgot">
               <span>Forgot Password?</span>
             </Link>
-          </div>
+          </div> */}
           <button className="bt" onClick={postLoginData}>
             Log In
           </button>

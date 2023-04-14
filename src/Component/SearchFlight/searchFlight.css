@@ -1,4 +1,4 @@
-.search_flight{
+/* .search_flight{
     padding-bottom: 2%;
 }
 .search_flight_select{
@@ -53,14 +53,6 @@
     align-items: center;
     box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.144);
 }
-.air_lines button{
-    background-color: black;
-    width:80px;
-    color:white;
-    padding:10px 0px;
-    border:none;
-    border-radius: 5px;
-}
 .air_line_price{
     background-color: #00AFEF;
     padding:3% 3%;
@@ -68,7 +60,7 @@
 .air_line_price{
     font-weight: bold;
     color:white;
-}
+}*/
 
 .air_available_flight{
     width:100%;
@@ -79,4 +71,25 @@
 }
 .hideAirDetails{
     display:none;
+} 
+.air{
+    display: flex;
+}
+.air_available_flight{
+    width: 100%;
+}
+.air_lines{
+    background-color: aqua;
+    margin-top: 1%;
+    padding:3% 1%;
+    display:flex;
+    justify-content: space-between;
+}
+.air_lines button{
+    background-color: black;
+    width:80px;
+    color:white;
+    padding:10px 0px;
+    border:none;
+    border-radius: 5px;
 }

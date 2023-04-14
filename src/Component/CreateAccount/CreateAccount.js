@@ -15,7 +15,7 @@ function CreateAccount() {
 
   const navigate = useNavigate();
   const baseUrl =
-    "https://2aea-154-113-161-131.ngrok-free.app/api/v1/passenger/register";
+    "https://ce99-102-88-62-64.ngrok-free.app/api/v1/passenger/register";
 
   const postRegData = {
       firstName,lastName, emailAddress, phoneNumber, password
@@ -51,14 +51,14 @@ function CreateAccount() {
 
     })
       .then((res) => {
-        console.log(res.data);
+        alert(res.data["data"].message);
         // res.data.isSuccessful && navigate("/login");
         
 
-        res.data.isSuccessful && navigate("/otp", {state:{email:emailAddress}});
+        res.data.isSuccessful && navigate("/login", {state:{email:emailAddress}});
       })
       .catch((error) => {
-        alert(error);
+       console.log(error);
       });
   };
   
